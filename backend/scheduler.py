@@ -3,8 +3,6 @@ import jokesAndQuotes
 import morningRoutine
 import time
 
-schedule.every(10).seconds.do(morningRoutine.morningRoutine)  
-
 # Morning Routine (Greeting, Sleep check, Challenge check, Daily challenge)
 # schedule.every().day.at("09:00").do(morningRoutine.morningRoutine)  
 
