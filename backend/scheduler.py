@@ -1,13 +1,18 @@
 import schedule
+import stretchReminder
 import time
+import waterReminder
+
 
 # Morning Routine (Greeting, Sleep check, Challenge check, Daily challenge)
 # schedule.every().day.at("09:00").do(morningRoutine)  
 
 # Morning Joke/Quotes
 # schedule.every().day.at("10:00").do(jokesAndQuotes)
+schedule.every(10).seconds.do(stretchReminder.streching)
 
 # Hourly Reminders
+# schedule.every(3).seconds.do(waterReminder.waterReminder)  
 # schedule.every().minute.at(":30").do(waterReminder)
 # schedule.every().minute.at(":30").do(stretchReminder)
 
