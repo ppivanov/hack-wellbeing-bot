@@ -1,9 +1,12 @@
 import schedule
-import healthbot
+import jokesAndQuotes
+import morningRoutine
 import time
 
+schedule.every(10).seconds.do(morningRoutine.morningRoutine)  
+
 # Morning Routine (Greeting, Sleep check, Challenge check, Daily challenge)
-# schedule.every().day.at("09:00").do(morningRoutine)  
+# schedule.every().day.at("09:00").do(morningRoutine.morningRoutine)  
 
 # Morning Joke/Quotes
 # schedule.every().day.at("10:00").do(jokesAndQuotes)

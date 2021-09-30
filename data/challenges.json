@@ -1,23 +1,23 @@
 [{
-    "challenge": "Drink 3 Litres of water today!"
+    "text": "Drink 3 Litres of water today! :droplet:"
 },{
-    "challenge": "Make a packed lunch today!!"
+    "text": "Make a packed lunch today!! :sandwich:"
 },{
-    "challenge": "Walk 10,000 steps today!"
+    "text": "Walk 10,000 steps today! :walking:"
 }, {
-    "challenge": "Do 20 lunges today"
+    "text": "Do 20 lunges today! :muscle:"
 }, {
-    "challenge": "Stretch for 20 minutes today!"
+    "text": "Stretch for 20 minutes today! :person_in_lotus_position:"
 }, {
-    "challenge": "Do 20 jumping jacks!"
+    "text": "Do 20 jumping jacks! :muscle:"
 }, {
-    "challenge": "Do a plank for 20 seconds today!"
+    "text": "Do a plank for 20 seconds today! :muscle:"
 }, {
-    "challenge": "Meditate for 20 minutes today!"
+    "text": "Meditate for 20 minutes today! :person_in_lotus_position:"
 }, {
-    "Challenge": "Sit less, stand up for 1 minute every hour today!"
+    "text": "Sit less, stand up for 1 minute every hour today! :seat:"
 }, {
-    "Challenge": "Jog on the spot for 2 minutes today!"
+    "text": "Jog on the spot for 2 minutes today! :running:"
 }, {
-    "Challenge": "Go outside 30 minutes today!!"
+    "text": "Go outside 30 minutes today!! :walking: :deciduous_tree:"
 }]
