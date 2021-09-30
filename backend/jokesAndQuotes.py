@@ -3,13 +3,8 @@ import json
 import random
 import time
 import emoji
-from pathlib import Path
-from dotenv import load_dotenv
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
-
-# env_path = Path('.') / '.env'
-# load_dotenv(dotenv_path=env_path)
 
 def jokesAndQuotes():
     with open('../data/jokes.json') as f:
