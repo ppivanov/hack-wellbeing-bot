@@ -1,5 +1,4 @@
 import schedule
-import healthbot
 import time
 
 # Morning Routine (Greeting, Sleep check, Challenge check, Daily challenge)
