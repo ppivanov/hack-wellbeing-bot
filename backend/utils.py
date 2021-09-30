@@ -14,7 +14,12 @@ users = {
 allowed_emojis = {
     'waterReminder': {
         'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero'
-    }
+    },
+    'jokesQuotes': {
+        'dart', 'rolling_on_the_floor_laughing'
+    },
+    'hoursOfSleep': {'headstone', 'yawning_face', 'laughing', 'sloth'},
+    'challengeCompletion': {'thumbsup', 'thumbsdown'}
 }
 
 
@@ -52,7 +57,7 @@ def get_allowed_reactions(discipline):
     return allowed_emojis[discipline]
 
 
-def get_reactions(username, timestamps, discipline):
+def react(username, timestamps, discipline):
     channel = resolve_user(username)
     allowed_reactions = get_allowed_reactions(discipline)
 
@@ -75,4 +80,4 @@ if __name__ == '__main__':
     # timestamps = send_joke('Martin Korytak')
     timestamp = send_message('Martin Korytak', 'did you drink anything in last hour?')
     time.sleep(20)
-    get_reactions('Martin Korytak', [timestamp], 'waterReminder')
+    react('Martin Korytak', [timestamp], 'waterReminder')
