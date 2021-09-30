@@ -10,30 +10,73 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # env_path = Path('.') / '.env'
 # load_dotenv(dotenv_path=env_path)
-
-def healthBot():
-    with open('../data/jokes.json') as f:
-        jokes = json.load(f)
-
-    joke = random.choice(jokes)
-    question = joke['question']
-    answer = joke['answer']
+def JokesAndQuotes():
 
     client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
+    response = client.conversations_open(users= "U02G6DGQ0LA") #Do not forgot to authomate this
+    channel = response.data['channel']['id']
 
-    users = {
-        "Martin Korytak": "U02GW2LF472",
-        "Tom Callaghan": "U02G6DM24KU",
-        "Pavel Ivanov": "U02FZM0QG3Y",
-        "Dennis Dimov": "U02GW22S76U",
-        "Josef Svec": "U02G6DGQ0LA"
-    }
+    client.chat_postMessage(
+        channel=channel, 
+        text="Hello, do you fell like a quote or a joke today? " \
+            f"React {emoji.emojize(':dart:')} or{emoji.emojize(':rolling_on_the_floor_laughing:')}"
+        )
 
-    for i in users.values():
-        response = client.conversations_open(users=[i])
+    #this is a temporary solution
+    if emoji == ':dart:':
+        Quotes()
+    elif emoji == ':rolling_on_the_floor_laughing:'
+        Jokes()
+    else:
+        send("Sorry, you did not indicate your choice clearly." \
+            "\n Let me ask you again.")
+
+
+    def Jokes():
+        with open('../data/jokes.json') as f:
+            jokes = json.load(f)
+
+        joke = random.choice(jokes)
+        question = joke['question']
+        answer = joke['answer']
+
+        client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
+
+        users = {
+            # "Martin Korytak": "U02GW2LF472",
+            # "Tom Callaghan": "U02G6DM24KU",
+            # "Pavel Ivanov": "U02FZM0QG3Y",
+            # "Dennis Dimov": "U02GW22S76U",
+            "Josef Svec": "U02G6DGQ0LA"
+        }
+
+        for i in users.values():
+            response = client.conversations_open(users=[i])
+            channel = response.data['channel']['id']
+
+            client.chat_postMessage(channel=channel, text="Question: {}".format(question))
+            time.sleep(2)
+            client.chat_postMessage(channel=channel, text="Answer: {}".format(answer))
+            client.chat_postMessage(channel=channel, text=emoji.emojize(':rolling_on_the_floor_laughing:'))
+
+    def Quotes():
+
+        with open("../data/quotes.json") as f:
+            quotes = json.load(f)
+        
+        quote_slip = random.choice(quotes)
+        quote = quote_slip['text']
+        author = quote_slip['author']
+
+        client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
+        response = client.conversations_open(users= "U02G6DGQ0LA") #Do not forgot to authomate this
         channel = response.data['channel']['id']
 
-        client.chat_postMessage(channel=channel, text="Question: {}".format(question))
-        time.sleep(2)
-        client.chat_postMessage(channel=channel, text="Answer: {}".format(answer))
-        client.chat_postMessage(channel=channel, text=emoji.emojize(':rolling_on_the_floor_laughing:'))
+        client.chat_postMessage(
+            channel=channel, 
+            text=f"Quote to get you through the day: \"{quote}\" \n by: {author}"
+            )
+
+
+
+JokesAndQuotes()
