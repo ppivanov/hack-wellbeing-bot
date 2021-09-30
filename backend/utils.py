@@ -57,9 +57,9 @@ def get_allowed_reactions(discipline):
     return allowed_emojis[discipline]
 
 
-def react(username, timestamps, discipline):
+def react_water_challenge(username, timestamps):
     channel = resolve_user(username)
-    allowed_reactions = get_allowed_reactions(discipline)
+    allowed_reactions = get_allowed_reactions('waterReminder')
 
     for ts in timestamps:
         response = client.reactions_get(channel=channel, timestamp=ts)
@@ -68,12 +68,31 @@ def react(username, timestamps, discipline):
         if any(reaction not in allowed_reactions for reaction in reactions):
             send_message(username,
                          f"Sorry :cry:, I don't understand this emoji! {', '.join(f':{reaction}:' for reaction in reactions if reaction not in allowed_reactions)}")
+            # resend the message
         elif any(reaction in {'five', 'six', 'seven', 'eight', 'nine'} for reaction in reactions):
             send_message(username, "Haha, very funny :angry:. Why don't I believe you? :thinking_face:")
         elif any(reaction == 'zero' for reaction in reactions):
             send_message(username, "You should change it immediately! :eyes:")
         else:
             send_message(username, "Good job! :clap:")
+
+
+def react_jokes_quotes(username, timestamps):
+    channel = resolve_user(username)
+    allowed_reactions = get_allowed_reactions('jokesQuotes')
+
+    for ts in timestamps:
+        response = client.reactions_get(channel=channel, timestamp=ts)
+        reactions = get_all_reactions(response)
+
+        if any(reaction not in allowed_reactions for reaction in reactions):
+            send_message(username,
+                         f"Sorry :cry:, I don't understand this emoji! {', '.join(f':{reaction}:' for reaction in reactions if reaction not in allowed_reactions)}")
+            # resend the message
+        
+
+
+
 
 
 if __name__ == '__main__':
