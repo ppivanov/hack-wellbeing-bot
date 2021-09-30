@@ -72,6 +72,8 @@
     {
         "id":8,
       "text": "When a JavaScript date has gone bad, \"Don't call me, I'll callback you. I promise!\"",
+      "question": "When a JavaScript date has gone bad,...",
+      "answer": "Don't call me, I'll callback you. I promise!",
       "author": "elijahmanor",
       "created": "09/09/2013",
       "tags": ["javascript"],
@@ -130,6 +132,8 @@
     {
         "id":14,
       "text": "Dev1 saw a strange JavaScript function & asked, \"What is this?\". Dev2 responded, \"I don't know. I would've called you, but I was in a bind\"",
+      "question": "Dev1 saw a strange JavaScript function & asked, \"What is this?\".",
+      "answer": "Dev2 responded, \"I don't know. I would've called you, but I was in a bind\"",
       "author": "elijahmanor",
       "created": "09/09/2013",
       "tags": ["javascript"],
@@ -138,6 +142,8 @@
     {
         "id":15,
       "text": "Two JavaScript developers walked into the variable `bar`. Ouch!",
+      "question":"Two JavaScript developers walked into the variable `bar`.",
+      "answer": " Ouch!",
       "author": "elijahmanor",
       "created": "09/10/2013",
       "tags": ["javascript"],
