@@ -25,7 +25,7 @@ users = {
     "Tom Callaghan": "U02G6DM24KU",
     "Pavel Ivanov": "U02FZM0QG3Y",
     "Dennis Dimov": "U02GW22S76U",
-    #"Josef Svec": ""
+    "Josef Svec": "U02G6DGQ0LA"
 }
 
 for i in users.values():
