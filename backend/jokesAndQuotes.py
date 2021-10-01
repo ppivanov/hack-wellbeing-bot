@@ -60,7 +60,7 @@ def JokesAndQuotes(username_indv):
     text = "Hello! What would help you to get through your day successfully? a quote or a joke today? " \
                 f"React :dart: or :rolling_on_the_floor_laughing:"
         )
-    time.sleep(60)
+    time.sleep(10)
     
     react_jokes_quotes(username = username_indv,
                         timestamp = ts)
