@@ -25,12 +25,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # # Report
 # schedule.every().day.at("17:00").do(dailyReport)
 
-
-# schedule.every(1).seconds.do(morningroutine.morning_routine)
-# schedule.every(1).seconds.do(jokesAndQuotes.JokesAndQuotes)
-# schedule.every(1).seconds.do(stretchReminder.streching)
-# schedule.every(1).seconds.do(waterReminder.waterReminder)
-# schedule.every(1).seconds.do(dailyReport.dailyReport)
+# while True:
+#     schedule.run_pending()
 
 morningroutine.morning_routine()
 time.sleep(20)
@@ -41,7 +37,3 @@ time.sleep(20)
 waterReminder.waterReminder()
 time.sleep(20)
 dailyReport.dailyReport()
-
-
-while True:
-    schedule.run_pending()

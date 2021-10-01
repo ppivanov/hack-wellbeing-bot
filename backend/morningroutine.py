@@ -15,14 +15,14 @@ def random_object_from_file(filepath):
 def send_sleep_promt(username):
     sleep_prompt = 'How many hours of sleep did you get last night?\n0-4 (:headstone:)\n5-6 (:yawning_face:)\n7-8 (:laughing:)\n9+ (:sloth:)'
     sleep_ts = utils.send_message(username, text=sleep_prompt)
-    time.sleep(15)
+    time.sleep(10)
     utils.react_sleep_routine(username, timestamp=sleep_ts)
 
 
 def send_challenge_prompt(username):
     challenge_prompt = 'Did you complete yesterday\'s daily challenge? :thumbsup:/:thumbsdown:'
     challenge_ts = utils.send_message(username, text=challenge_prompt)
-    time.sleep(15)
+    time.sleep(10)
     utils.react_daily_challenge(username, timestamp=challenge_ts)
 
 
