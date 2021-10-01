@@ -1,6 +1,6 @@
 import schedule
 import jokesAndQuotes
-import morningRoutine
+import morningroutine
 import stretchReminder
 import time
 import waterReminder
