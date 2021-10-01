@@ -32,10 +32,4 @@ def streching():
         response = client.conversations_open(users=[i])
         channel = response.data['channel']['id']
 
-        client.chat_postMessage(channel=channel, text="Excercise: {}".format(text))
-        client.chat_postMessage(channel=channel, text="time: {}".format(times))
-        client.chat_postMessage(channel=channel, text="We start in 30sec")
-        time.sleep(30)
-        client.chat_postMessage(channel=channel, text="let's go!")
-        time.sleep(int(times))
-        client.chat_postMessage(channel=channel, text="You have done it!")
+        client.chat_postMessage(channel=channel, text="Hey it's about time for your stretching session! \n *Your task is:* \n {} \n *Duration:* {} sec \n Have fun! :muscle:".format(text, times))

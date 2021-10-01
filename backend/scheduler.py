@@ -9,7 +9,7 @@ import waterReminder
 # schedule.every(10).seconds.do(stretchReminder.streching)
 
 # Morning Routine (Greeting, Sleep check, Challenge check, Daily challenge)
-# schedule.every().day.at("09:00").do(morningRoutine.morningRoutine)  
+# schedule.every().day.at("09:00").do(morningRoutine.morning_routine)  
 
 # Morning Joke/Quotes
 # schedule.every().day.at("10:00").do(jokesAndQuotes.JokesAndQuotes)
