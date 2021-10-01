@@ -1,46 +1,44 @@
+from types import resolve_bases
 import slack
 import json
 import random
 import time
 import emoji
+import utils
 from pathlib import Path
 from dotenv import load_dotenv
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
+def random_object_from_file(filepath):
+    with open(filepath) as file:
+        obj = json.load(file)
+    return random.choice(obj)
 
-def morningRoutine():
-    env_path = Path('.') / '.env'
-    load_dotenv(dotenv_path=env_path)
+def send_sleep_promt(username):
+    sleep_prompt = 'How many hours of sleep did you get last night?\n0-4 (:headstone:)\n5-6 (:yawning_face:)\n7-8 (:laughing:)\n9+ (:sloth:)'
+    sleep_ts = utils.send_message(username, text=sleep_prompt)
+    time.sleep(10)
+    utils.react_sleep_routine(username, timestamp=sleep_ts)
 
-    with open('../data/challenges.json') as file:
-        challenges = json.load(file)
-    with open('../data/greetings.json') as file:
-        greetings = json.load(file)
+def send_challenge_prompt(username):
+    challenge_prompt = 'Did you complete yesterday\'s daily challenge? :thumbsup:/:thumbsdown:\n_Use reactions below to respond..._'
+    challenge_ts = utils.send_message(username, text=challenge_prompt)
+    time.sleep(10)
+    utils.react_daily_challenge(username, timestamp=challenge_ts)
 
-    morningGreeting = random.choice(greetings)
-    challenge = random.choice(challenges)
+def send_morning_prompts(username):
+    send_sleep_promt(username)
+    send_challenge_prompt(username)
+  
+def morning_routine():
+    morning_greeting = random_object_from_file('../data/greetings.json')['text']
+    challenge = random_object_from_file('../data/challenges.json')['text']
 
-    client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
+    for current_user in utils.users:
+        print(current_user)
+        utils.send_message(current_user, text=morning_greeting)
 
-    users = {
-        "Martin Korytak": "U02GW2LF472",
-        "Tom Callaghan": "U02G6DM24KU",
-        "Pavel Ivanov": "U02FZM0QG3Y",
-        "Dennis Dimov": "U02GW22S76U",
-        "Josef Svec": "U02G6DGQ0LA"
-    }
-
-    sleepPrompt = 'How many hours of sleep did you get last night?\n0-4 (:headstone:)\n5-6 (:yawning_face:)\n7-8 (:laughing:)\n9+ (:sloth:)'
-    challengePrompt = 'Did you complete yesterday\'s daily challenge? :thumbsup:/:thumbsdown:\n_Use reactions below to respond..._'
-
-    for i in users.values():
-        response = client.conversations_open(users=[i])
-        channel = response.data['channel']['id']
-        client.chat_postMessage(channel=channel, text=emoji.emojize(morningGreeting["text"]))
-
-        client.chat_postMessage(channel=channel, text=emoji.emojize(sleepPrompt))
-        client.chat_postMessage(channel=channel, text=emoji.emojize(challengePrompt))
+        send_morning_prompts(current_user)
         
-        client.chat_postMessage(channel=channel, text=emoji.emojize(f'Daily challenge: {challenge["text"]}'))
-
+        utils.send_message(current_user, text=challenge)
