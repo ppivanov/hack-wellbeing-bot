@@ -41,4 +41,4 @@ def morning_routine():
 
         send_morning_prompts(current_user)
         
-        utils.send_message(current_user, text=challenge)
+        utils.send_message(current_user, text=f'Daily challenge: {challenge}')
