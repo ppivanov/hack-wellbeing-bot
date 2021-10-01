@@ -22,6 +22,8 @@ allowed_emojis = {
     'challengeCompletion': {'+1', '-1'}
 }
 
+user = 'Martin Korytak'
+
 
 def resolve_user(username):
     response = client.conversations_open(users=[users[username]])
@@ -75,28 +77,10 @@ def react_water_challenge(username, timestamp):
     reaction = reactions.pop()
     if reaction == 'ocean':
         send_message(username, "Please, don't get drowned! :pray:")
-    elif any(reaction == 'non-potable_water' for reaction in reactions):
+    elif reaction == 'non-potable_water':
         send_message(username, "You should change it immediately! :eyes:")
     else:
         send_message(username, "Good job! :clap:")
-
-
-def react_jokes_quotes(username, timestamp):
-    channel = resolve_user(username)
-    allowed_reactions = get_allowed_reactions('jokesQuotes')
-
-    response = client.reactions_get(channel=channel, timestamp=timestamp)
-    reactions = get_all_reactions(response)
-
-    is_ok = check_reaction(username, reactions, allowed_reactions)
-    if not is_ok:
-        return
-
-    reaction = reactions.pop()
-    if reaction == 'dart':
-        Quotes()
-    elif reaction == 'rolling_on_the_floor_laughing':
-        Jokes()
 
 
 def react_sleep_routine(username, timestamp):
