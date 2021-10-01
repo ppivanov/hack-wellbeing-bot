@@ -3,33 +3,55 @@ import json
 import random
 import time
 import emoji
-from pathlib import Path
-from dotenv import load_dotenv
 import ssl
+import utils
 ssl._create_default_https_context = ssl._create_unverified_context
+
+
 
 # env_path = Path('.') / '.env'
 # load_dotenv(dotenv_path=env_path)
-def JokesAndQuotes():
+def JokesAndQuotes(username_routine):
 
-    client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
-    response = client.conversations_open(users= "U02G6DGQ0LA") #Do not forgot to authomate this
-    channel = response.data['channel']['id']
+    # client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
+    # response = client.conversations_open(users= "U02G6DGQ0LA") #Do not forgot to authomate this
+    # channel = response.data['channel']['id']
+    ts = utils.send_message(
+        username = username_routine,
+        text = "Hello!"
+    )
+    def Choosing():
+        utils.send_message(
+            username=username_routine, 
+            text="Do you fell like a quote or a joke today? " \
+                f"React :dart: or :rolling_on_the_floor_laughing:"
+            )
+        emoji = utils.get_reactions(username = username_routine, 
+                                    timestamps=[ts],
+                                    discipline="")
 
-    client.chat_postMessage(
-        channel=channel, 
-        text="Hello, do you fell like a quote or a joke today? " \
-            f"React {emoji.emojize(':dart:')} or{emoji.emojize(':rolling_on_the_floor_laughing:')}"
-        )
+        #this is a temporary solution
+        # if emoji == ':dart:':
+        #     Quotes()
+        # elif emoji == ':rolling_on_the_floor_laughing:':
+        #     Jokes()
+        # else:
+        #     send("Sorry, you did not indicate your choice clearly." \
+        #         "\n Let me ask you again.")
+    def react_jokes_quotes(username, timestamp):
+    channel = utils.resolve_user(username)
+    allowed_reactions = utils.get_allowed_reactions('jokesQuotes')
 
-    #this is a temporary solution
-    if emoji == ':dart:':
+    response = client.reactions_get(channel=channel, timestamp=timestamp)
+    reactions = utils.get_all_reactions(response)
+
+    utils.check_reaction(username, reactions, allowed_reactions)
+
+    reaction = reactions.pop()
+    if reaction == ':dart:':
         Quotes()
-    elif emoji == ':rolling_on_the_floor_laughing:'
-        Jokes()
-    else:
-        send("Sorry, you did not indicate your choice clearly." \
-            "\n Let me ask you again.")
+    elif reaction == ':rolling_on_the_floor_laughing:':
+        Jokes()         
 
 
     def Jokes():
@@ -40,16 +62,6 @@ def JokesAndQuotes():
         question = joke['question']
         answer = joke['answer']
 
-        client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
-
-        users = {
-            # "Martin Korytak": "U02GW2LF472",
-            # "Tom Callaghan": "U02G6DM24KU",
-            # "Pavel Ivanov": "U02FZM0QG3Y",
-            # "Dennis Dimov": "U02GW22S76U",
-            "Josef Svec": "U02G6DGQ0LA"
-        }
-
         for i in users.values():
             response = client.conversations_open(users=[i])
             channel = response.data['channel']['id']
@@ -59,7 +71,7 @@ def JokesAndQuotes():
             client.chat_postMessage(channel=channel, text="Answer: {}".format(answer))
             client.chat_postMessage(channel=channel, text=emoji.emojize(':rolling_on_the_floor_laughing:'))
 
-    def Quotes():
+    def Quotes(username_routine):
 
         with open("../data/quotes.json") as f:
             quotes = json.load(f)
@@ -68,15 +80,18 @@ def JokesAndQuotes():
         quote = quote_slip['text']
         author = quote_slip['author']
 
-        client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
+        # client = slack.WebClient('xoxb-2535729735287-2574128624896-GL5JKsUH9q6u7exZSGrtJibT')
         response = client.conversations_open(users= "U02G6DGQ0LA") #Do not forgot to authomate this
         channel = response.data['channel']['id']
 
-        client.chat_postMessage(
-            channel=channel, 
+        utils.send_message(
+            username = username_routine,
             text=f"Quote to get you through the day: \"{quote}\" \n by: {author}"
             )
 
 
 
-JokesAndQuotes()
+# JokesAndQuotes()
+
+for k in utils.users:
+    print(k)
