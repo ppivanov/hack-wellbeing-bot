@@ -19,7 +19,7 @@ allowed_emojis = {
         'dart', 'rolling_on_the_floor_laughing'
     },
     'hoursOfSleep': {'headstone', 'yawning_face', 'laughing', 'sloth'},
-    'challengeCompletion': {'thumbsup', 'thumbsdown'}
+    'challengeCompletion': {'+1', '-1'}
 }
 
 
@@ -48,6 +48,7 @@ def get_allowed_reactions(discipline):
 
 
 def check_reaction(username, reactions, allowed_reactions):
+    is_ok = False
     if not reactions:
         send_message(username, "HealthyBot is sad because you haven't responded yet. :cry:")
     elif len(reactions) > 1:
@@ -55,6 +56,9 @@ def check_reaction(username, reactions, allowed_reactions):
     elif any(reaction not in allowed_reactions for reaction in reactions):
         send_message(username,
                      f"Sorry :cry:, I don't understand this emoji! {', '.join(f':{reaction}:' for reaction in reactions if reaction not in allowed_reactions)}")
+    else:
+        is_ok = True
+    return is_ok
 
 
 def react_water_challenge(username, timestamp):
@@ -64,7 +68,9 @@ def react_water_challenge(username, timestamp):
     response = client.reactions_get(channel=channel, timestamp=timestamp)
     reactions = get_all_reactions(response)
 
-    check_reaction(username, reactions, allowed_reactions)
+    is_ok = check_reaction(username, reactions, allowed_reactions)
+    if not is_ok:
+        return
 
     reaction = reactions.pop()
     if reaction == 'ocean':
@@ -82,18 +88,64 @@ def react_jokes_quotes(username, timestamp):
     response = client.reactions_get(channel=channel, timestamp=timestamp)
     reactions = get_all_reactions(response)
 
-    check_reaction(username, reactions, allowed_reactions)
+    is_ok = check_reaction(username, reactions, allowed_reactions)
+    if not is_ok:
+        return
 
     reaction = reactions.pop()
-    if reaction == ':dart:':
+    if reaction == 'dart':
         Quotes()
-    elif reaction == ':rolling_on_the_floor_laughing:':
+    elif reaction == 'rolling_on_the_floor_laughing':
         Jokes()
+
+
+def react_sleep_routine(username, timestamp):
+    channel = resolve_user(username)
+    allowed_reactions = get_allowed_reactions('hoursOfSleep')
+
+    response = client.reactions_get(channel=channel, timestamp=timestamp)
+    reactions = get_all_reactions(response)
+
+    is_ok = check_reaction(username, reactions, allowed_reactions)
+    if not is_ok:
+        return
+
+    reaction = reactions.pop()
+    if reaction == 'headstone':
+        send_message(username, 'Please, get some rest! See you tomorrow! :eyes:')
+    elif reaction == 'yawing_face':
+        send_message(username, 'Hm, not great, not terrible :grimacing:')
+    elif reaction == 'laughing':
+        send_message(username, "Good job! :clap:")
+    else:
+        send_message(username, "You're such a sloth! You should wake up earlier :sleeping:")
+
+
+def react_daily_challenge(username, timestamp):
+    channel = resolve_user(username)
+    allowed_reactions = get_allowed_reactions('challengeCompletion')
+
+    response = client.reactions_get(channel=channel, timestamp=timestamp)
+    reactions = get_all_reactions(response)
+
+    is_ok = check_reaction(username, reactions, allowed_reactions)
+    if not is_ok:
+        return
+
+    reaction = reactions.pop()
+    if reaction == '+1':
+        send_message(username, 'WOW :open_mouth:, great job! :tada:')
+    elif reaction == '-1':
+        send_message(username, "You should try to change it today! :thinking_face:")
 
 
 if __name__ == '__main__':
     # timestamps = send_joke('Martin Korytak')
     while True:
-        timestamp = send_message('Martin Korytak', 'did you drink anything in last hour?')
+        # timestamp = send_message('Martin Korytak', 'did you complete challenge?')
+        # time.sleep(5)
+        # react_daily_challenge('Martin Korytak', timestamp)
+
+        timestamp = send_message('Martin Korytak', 'did you sleep?')
         time.sleep(5)
-        react_water_challenge('Martin Korytak', timestamp)
+        react_sleep_routine('Martin Korytak', timestamp)
