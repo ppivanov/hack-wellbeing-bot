@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "user": "Martin Korytak",
+      "date": "1.10.2021",
+      "n_cups": 3,
+      "n_hours": 8
+    },
+    {
+      "user": "Tom Callaghan",
+      "date": "1.10.2021",
+      "n_cups": 10,
+      "n_hours": 9
+    },
+    {
+      "user": "Pavel Ivanov",
+      "date": "1.10.2021",
+      "n_cups": 4,
+      "n_hours": 4
+    },
+    {
+      "user": "Dennis Dimov",
+      "date": "1.10.2021",
+      "n_cups": 7,
+      "n_hours": 8
+    },
+    {
+      "user": "Josef Svec",
+      "date": "1.10.2021",
+      "n_cups": 5,
+      "n_hours": 2
+    }
+  ]
+}

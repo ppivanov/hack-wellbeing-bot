@@ -8,7 +8,7 @@ from datetime import datetime
 
 def waterReminder():
     now = datetime.now()
-    currTime = '10:30'#str(now.hour) + ":" + str(now.minute)
+    currTime = '10:30'  # str(now.hour) + ":" + str(now.minute)
 
     waterDic = {
         "10:30": "0.25",
@@ -26,12 +26,14 @@ def waterReminder():
     else:
         waterAmount = 0
 
-    utils.send_message(utils.user, "{} Gentle Reminder {}\n Don't forget to drink water!{} At this point of the day, you should have drank approx {}L."
-            .format(emoji.emojize(':bell:'), emoji.emojize(':bell:'), emoji.emojize(':potable_water:'),
-                    waterAmount))
+    utils.send_message(utils.user,
+                       "{} Gentle Reminder {}\n Don't forget to drink water!{} At this point of the day, you should have drank approx {}L."
+                       .format(emoji.emojize(':bell:'), emoji.emojize(':bell:'), emoji.emojize(':potable_water:'),
+                               waterAmount))
 
-    ts = utils.send_message(utils.user, "How much water have you drank in the last hour? \n\n {} 0-0.5 Cup\n\n {} 0.5-1 Cup(s)\n\n {} 1.0-1.5 Cup(s)\n\n {} 1.5+ Cup(s)"
-            .format(':non-potable_water:', ':droplet:', ':potable_water:', ':ocean:'))
+    ts = utils.send_message(utils.user,
+                            "How much water have you drank in the last hour? \n\n {} 0-0.5 Cup\n\n {} 0.5-1 Cup(s)\n\n {} 1.0-1.5 Cup(s)\n\n {} 1.5+ Cup(s)"
+                            .format(':non-potable_water:', ':droplet:', ':potable_water:', ':ocean:'))
 
     time.sleep(10)
     utils.react_water_challenge(utils.user, ts)

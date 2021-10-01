@@ -3,6 +3,7 @@ import jokesAndQuotes
 # import morningRoutine
 import stretchReminder
 import time
+import dailyReport
 import waterReminder
 
 # schedule.every(10).seconds.do(stretchReminder.streching)
@@ -24,8 +25,9 @@ import waterReminder
 # Report
 # schedule.every().day.at("10:00").do(dailyReport)
 
-schedule.every(1).seconds.do(jokesAndQuotes.JokesAndQuotes)
-schedule.every(1).seconds.do(waterReminder.waterReminder)
+# schedule.every(1).seconds.do(jokesAndQuotes.JokesAndQuotes)
+# schedule.every(1).seconds.do(waterReminder.waterReminder)
+schedule.every(1).seconds.do(dailyReport.dailyReport)
 
 while True:
     schedule.run_pending()
