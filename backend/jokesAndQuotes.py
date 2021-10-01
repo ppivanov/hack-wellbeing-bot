@@ -66,7 +66,8 @@ def JokesAndQuotes(username_indv):
                         timestamp = ts)
  
 
-
+#Just change here the name of the user for the testing!
 JokesAndQuotes(username_indv="Josef Svec")
+
 # for user in utils.users:
 #     JokesAndQuotes(username_routine= user,)
