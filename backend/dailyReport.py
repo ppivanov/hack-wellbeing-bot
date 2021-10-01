@@ -15,5 +15,10 @@ def dailyReport():
     user_data = select_user_data(data)
     n_cups = user_data['n_cups']
     n_hours = user_data['n_hours']
-    utils.send_message(utils.user, f"You had {n_cups} cups in total and slept for {n_hours} hours last night.")
-    utils.send_message(utils.user, "Enjoy your evening and see you tomorrow :zzz:")
+
+    utils.send_message(utils.user, f"Your Health Report :droplet:\n"
+                                   f"----------------------------------------------------\n"
+                                   f"Water Intake: {n_cups} cups\nSleep: {n_hours} hours\n"
+                                   f"Great work on improving your wellbeing! :battery:\n"
+                                   f"----------------------------------------------------")
+
