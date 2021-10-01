@@ -39,19 +39,19 @@ def JokesAndQuotes(username_routine):
         #     send("Sorry, you did not indicate your choice clearly." \
         #         "\n Let me ask you again.")
     def react_jokes_quotes(username, timestamp):
-    channel = utils.resolve_user(username)
-    allowed_reactions = utils.get_allowed_reactions('jokesQuotes')
+        channel = utils.resolve_user(username)
+        allowed_reactions = utils.get_allowed_reactions('jokesQuotes')
 
-    response = client.reactions_get(channel=channel, timestamp=timestamp)
-    reactions = utils.get_all_reactions(response)
+        response = client.reactions_get(channel=channel, timestamp=timestamp)
+        reactions = utils.get_all_reactions(response)
 
-    utils.check_reaction(username, reactions, allowed_reactions)
+        utils.check_reaction(username, reactions, allowed_reactions)
 
-    reaction = reactions.pop()
-    if reaction == ':dart:':
-        Quotes()
-    elif reaction == ':rolling_on_the_floor_laughing:':
-        Jokes()         
+        reaction = reactions.pop()
+        if reaction == ':dart:':
+            Quotes()
+        elif reaction == ':rolling_on_the_floor_laughing:':
+            Jokes()         
 
 
     def Jokes():
@@ -93,5 +93,5 @@ def JokesAndQuotes(username_routine):
 
 # JokesAndQuotes()
 
-for k in utils.users:
+for k in users:
     print(k)
