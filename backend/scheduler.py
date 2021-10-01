@@ -4,6 +4,10 @@ import morningroutine
 import stretchReminder
 import dailyReport
 import waterReminder
+import ssl
+import time
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # # Morning Routine (Greeting, Sleep check, Challenge check, Daily challenge)
 # schedule.every().day.at("09:00").do(morningroutine.morning_routine)
@@ -27,6 +31,17 @@ import waterReminder
 # schedule.every(1).seconds.do(stretchReminder.streching)
 # schedule.every(1).seconds.do(waterReminder.waterReminder)
 # schedule.every(1).seconds.do(dailyReport.dailyReport)
+
+morningroutine.morning_routine()
+time.sleep(20)
+jokesAndQuotes.JokesAndQuotes()
+time.sleep(20)
+stretchReminder.streching()
+time.sleep(20)
+waterReminder.waterReminder()
+time.sleep(20)
+dailyReport.dailyReport()
+
 
 while True:
     schedule.run_pending()

@@ -22,7 +22,7 @@ allowed_emojis = {
     'challengeCompletion': {'+1', '-1'}
 }
 
-user = 'Martin Korytak'
+user = 'Pavel Ivanov'
 
 
 def resolve_user(username):
