@@ -57,15 +57,16 @@ def JokesAndQuotes(username_indv):
     
     ts = utils.send_message(
     username = username_indv,
-    text = "Hello!, Do you fell like a quote or a joke today? " \
+    text = "Hello! What would help you to get through your day successfully? a quote or a joke today? " \
                 f"React :dart: or :rolling_on_the_floor_laughing:"
         )
-
+    time.sleep(60)
+    
     react_jokes_quotes(username = username_indv,
                         timestamp = ts)
  
 
 
-
+JokesAndQuotes(username_indv="Josef Svec")
 # for user in utils.users:
 #     JokesAndQuotes(username_routine= user,)
