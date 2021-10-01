@@ -9,31 +9,22 @@ import time
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# # Morning Routine (Greeting, Sleep check, Challenge check, Daily challenge)
-# schedule.every().day.at("09:00").do(morningroutine.morning_routine)
-#
-# # Morning Joke/Quotes
-# schedule.every().day.at("10:00").do(jokesAndQuotes.JokesAndQuotes)
-#
-# # Hourly Reminders
-# schedule.every().minute.at(":30").do(waterReminder.waterReminder)
-# schedule.every().minute.at(":30").do(stretchReminder.streching)
-#
-# # Afternoon Joke/Quotes
-# schedule.every().day.at("14:00").do(jokesAndQuotes.JokesAndQuotes)
-#
-# # Report
-# schedule.every().day.at("17:00").do(dailyReport)
+# Morning Routine (Greeting, Sleep check, Challenge check, Daily challenge)
+schedule.every().day.at("09:00").do(morningroutine.morning_routine)
 
-# while True:
-#     schedule.run_pending()
+# Morning Joke/Quotes
+schedule.every().day.at("10:00").do(jokesAndQuotes.JokesAndQuotes)
 
-morningroutine.morning_routine()
-time.sleep(20)
-jokesAndQuotes.JokesAndQuotes()
-time.sleep(20)
-stretchReminder.streching()
-time.sleep(20)
-waterReminder.waterReminder()
-time.sleep(20)
-dailyReport.dailyReport()
+# Hourly Reminders
+schedule.every().minute.at(":30").do(waterReminder.waterReminder)
+schedule.every().minute.at(":30").do(stretchReminder.streching)
+
+# Afternoon Joke/Quotes
+schedule.every().day.at("14:00").do(jokesAndQuotes.JokesAndQuotes)
+
+# Report
+schedule.every().day.at("17:00").do(dailyReport)
+
+while True:
+    schedule.run_pending()
+    
